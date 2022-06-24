@@ -46,15 +46,17 @@
           &nbsp;<button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
         </form>
       </div>
-      {% if current_user.is_authenticated %}
+      
       <div>
+        {% if current_user.is_authenticated %}
         <ul class="navbar-nav mr-auto">
           <li class="nav-item">
             <a class="nav-link" href="/profile">@{{current_user.username}}</a>
           </li>
         </ul>
+        {% endif %}
       </div>
-      {% endif %}
+      
     </div>
   </nav>
 </head>
