@@ -1,23 +1,31 @@
-body { 
-    padding-top: 59px; 
+body {
+    padding-top: 59px;
 }
 
 .alert {
     margin-bottom: 1px;
     height: 40px;
-    line-height:40px;
-    padding:0px 15px;
-  }
+    line-height: 40px;
+    padding: 0px 15px;
+}
 
-a{
-    color: inherit; 
+a {
+    color: inherit;
     text-decoration: inherit;
 }
 
 
 @media only screen and (min-width: 992px) {
     .flex-media {
-        display: flex; 
+        display: flex;
         justify-content: space-between;
     }
-  }
+}
+
+.span-underline {
+    color: blue;
+}
+
+.span-underline:hover {
+    text-decoration: underline;
+}
