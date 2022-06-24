@@ -11,7 +11,6 @@ from collections import Counter
 blogRoutes = Blueprint("blogRoutes", __name__)
 
 
-@blogRoutes.route("/")
 @blogRoutes.route("/profile")
 @login_required
 def home():
@@ -53,6 +52,7 @@ def create_post():
     return render_template("createPost.html")
 
 
+@blogRoutes.route("/")
 @blogRoutes.route("/allposts", methods=['GET', 'POST'])
 def all_posts():
     posts = db.session.query(Post).all()
