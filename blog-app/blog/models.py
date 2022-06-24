@@ -49,7 +49,6 @@ class Post(db.Model):
     userid = db.Column(db.Integer, db.ForeignKey("user.id"), nullable=False)
     title = db.Column(db.String(100), unique=False, nullable=False)
     content = db.Column(db.Text, unique=False, nullable=False)
-    tags = db.Column(db.String(200), unique=False, nullable=False)
 
     created_date = db.Column(db.DateTime(timezone=True), default=func.now())
     modified_date = db.Column(db.DateTime(timezone=True), nullable=True)
