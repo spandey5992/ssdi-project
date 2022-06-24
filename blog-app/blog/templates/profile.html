@@ -1,0 +1,47 @@
+{% extends "layout.html" %}
+
+{% block title %}Profile{% endblock %}
+
+{% block body_content %}
+<div class="row">
+    <div class="col">
+        <br>
+        <h4> Top 5 Most Recent Posts</h4>
+        <br>
+        {% for row in top5posts %}
+        <div class="card w-100">
+            <div class="card-body">
+                <a href="/post/{{row.id}}">
+                    <h5 class="card-title">{{row.title}}</h5>
+                </a>
+            <p class="card-text">{{row.content[:50]}}...</p>
+            </div>
+            <div class="card-footer text-muted">
+            {{row.num_of_days}} days ago
+            </div>
+        </div>
+        <br>
+        {% endfor %}
+    </div>
+    <div class="col">
+        <br>
+        <h4> Top 5 Most Recent Comments</h4>
+        <br>
+        {% for row in top5comments %}
+        <div class="card w-100">
+            <div class="card-body">
+                <a href="/post/{{row.postid}}">
+
+                    <p class="card-text">{{row.comment[:50]}}...</p>
+                </a>
+            </div>
+            <div class="card-footer text-muted">
+            {{row.num_of_days}} days ago
+            </div>
+        </div>
+        <br>
+
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

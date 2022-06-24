@@ -1,0 +1,21 @@
+{% extends "layout.html" %} {% block title %}{{page}}{% endblock %} {% block
+    body_content %}
+    <br/>
+    <h3 align="center">{{page}}</h3>
+    {% for row in posts %}
+    
+    <div class="card w-100">
+        <div class="card-body">
+            <a href="/post/{{row.id}}">
+                <h5 class="card-title">{{row.title}}</h5>
+            </a>
+          <p class="card-text">{{row.content[:50]}}...</p>
+        </div>
+        <div class="card-footer text-muted">
+          {{row.num_of_days}} days ago
+        </div>
+      </div>
+      <br>
+
+    {% endfor %}
+{% endblock %}

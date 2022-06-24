@@ -1,0 +1,101 @@
+{% extends "layout.html" %} {% block title %}Post Details{% endblock %} {% block
+    body_content %}
+    <br/>
+    <h3 align="center">Blog Details</h3>
+    <div class="row">
+        <div class="col">
+            <div class="card">
+                <h4 class="card-header">
+                    {{post.title}}
+                </h4>
+                <div class="card-body">
+                        <div class="card-title" style="font-size: 18px;">
+                            {{post.content}}
+                        </div>
+                <br>
+                <p class="card-text">
+                    <footer class="blockquote-footer">
+                        <small class="text-muted">
+                            Posted by {{post.user.firstname + " "+post.user.lastname}}</p>
+                        </small>
+                    </footer>
+                </div>
+                <div class="card-footer text-muted">
+                    <form>
+                    <strong>{{likecount}} </strong>
+                        &nbsp;
+                    <a href="/like/{{post.id}}">
+                        {% if post.liked %}
+                        <img src = "{{ url_for('static', filename='images/fill.svg') }}" height="25" alt="Liked" />
+                        {% else %}
+                        <img src = "{{ url_for('static', filename='images/nonfill.svg') }}" height="25" alt="DisLiked"/>
+                        {% endif %}
+                    </a>
+                        {% if current_user.id == post.userid %}
+                            &nbsp;<button type="submit" formmethod="GET" class="btn btn-secondary btn-sm" formaction="/post/{{post.id}}/edit">Edit</button>
+                            &nbsp;<button type="submit" formmethod="POST" class="btn btn-secondary btn-sm" formaction="/post/{{post.id}}/delete">Delete</button>
+                        {% endif %}
+                        </form>
+                </div>
+            </div>
+            <br>
+            <div class="card">
+                <div class="card-body">
+                    <p class="card-text">
+                        <form method="POST" action="/comment/{{post.id}}">
+                            <div class="form-group">
+                                <textarea id="comment" name="comment" class="form-control" placeholder="Enter Comment"></textarea>
+                                <br>
+                                <button class="btn btn-primary" type="submit">Comment</button>
+                            </div>
+                        </form>
+                    </p>
+                </div>
+            </div>
+            <br>
+            <h5>Comments</h5>
+            <br>
+            {% if not post.comment %}
+                <p class="card-text">
+                    Be the first one to comment.
+                </p>
+            {% endif %}
+            {% for comment in post.comment%}
+                <div class="card">
+                    <div class="card-body">
+                        <p class="card-text">
+                            {{comment.comment}}
+                        </p>
+                        <footer class="blockquote-footer">
+                            <small class="text-muted">
+                                {{comment.user.username}}</p>
+                            </small>
+                        </footer>
+                    </div>
+                    <form method="POST" action="/comment/{{comment.id}}/delete">
+                        <div class="form-group">
+                            &nbsp;<button class="btn btn-secondary btn-sm" type="submit">Delete</button>
+                        </div>
+                    </form>
+                </div>
+            {% endfor %}
+        </div>
+        <div class="col-2">
+            <h5>Suggested Posts</h5>
+            <div class="card">
+                <div class="card-body">
+                    {% for pst in suggest %}
+                    <small class="text-muted">
+                        <a href="/post/{{pst.id}}">{{pst.title}}</a>
+                    </small>
+                    <hr>
+                    {% endfor %}
+                </div>
+
+            </div>
+
+        </div>
+        
+    </div>
+      <br>
+{% endblock %}

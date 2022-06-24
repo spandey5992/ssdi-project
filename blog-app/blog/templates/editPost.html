@@ -1,0 +1,32 @@
+{% extends "layout.html" %} {% block title %}Create New Post{% endblock %} {% block
+    body_content %}
+
+
+<form method="POST" action="/post/{{post.id}}/edit">
+    <br />
+    <h3 align="center">Edit Post</h3>
+    <div class="form-group">
+
+        <label for="title">Enter Title</label>
+        <input type="text" id="title" name="title" class="form-control" placeholder="Enter Title" value='{{post.title}}'/>
+        <br />
+
+        <label for="content">Content</label>
+        
+        <textarea id="content" name="content" class="form-control" placeholder="Enter Content">{{post.content}}</textarea>
+        <br />
+
+        <label for="tag">Enter Tags</label>
+        <input type="text" id="tag" name="tag" class="form-control" placeholder="Enter Tags" value='{{post.tags}}'/>
+
+        <br />
+
+        <div align="center">
+            <button class="btn btn-primary" type="submit">Update Post</button>
+        </div>
+
+    </div>
+</form>
+
+
+{% endblock %}
