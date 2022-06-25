@@ -71,7 +71,8 @@ def post(id):
     liked = None
     if current_user.is_authenticated:
         presence = db.session.query(Like).filter(
-            Post.id == id, User.id == current_user.id).first()
+            Like.postid == id, Like.userid == current_user.id).first()
+        print("---presence------", presence)
         if presence:
             liked = 1
     post.liked = liked
@@ -91,6 +92,8 @@ def post(id):
     searched_post = db.session.query(Post).filter(
         Post.id.in_(postid_count)).limit(5).all()
 
+    print(post.liked)
+
     return render_template("post.html", post=post, likecount=len(post.like), suggest=searched_post)
 
 
@@ -98,7 +101,7 @@ def post(id):
 @login_required
 def like(id):
     presence = db.session.query(Like).filter(
-        Post.id == id, User.id == current_user.id).first()
+        Like.postid == id, Like.userid == current_user.id).first()
     if not presence:
         like = Like(userid=current_user.id, postid=id)
         db.session.add(like)
