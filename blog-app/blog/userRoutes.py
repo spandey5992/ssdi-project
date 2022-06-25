@@ -60,3 +60,23 @@ def logout():
     logout_user()
     flash('Successfully Logged Out!', category='success')
     return redirect(url_for("userRoutes.login"))
+
+
+@userRoutes.route("/edituser", methods=['GET', 'POST'])
+@login_required
+def edituser():
+    if request.method == 'POST':
+        firstname = request.form.get("firstname")
+        lastname = request.form.get("lastname")
+        username = request.form.get("username")
+        email = request.form.get("email")
+        password = request.form.get("password")
+        db.session.query(User).filter(User.id==current_user.id).update({'firstname':firstname, 
+                                                        'lastname':lastname, 
+                                                        'username':username,
+                                                        'email':email,
+                                                        'password':generate_password_hash(password, method='sha256')})
+        db.session.commit()
+        flash('Details updated successfully', category='success')
+        return redirect(url_for('blogRoutes.home'))
+    return render_template("userEdit.html")
