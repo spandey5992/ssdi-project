@@ -161,13 +161,13 @@ def editpost(id):
     return render_template("editPost.html", post=post)
 
 
-@blogRoutes.route("/post/search/", methods=['GET', 'POST'])
+@blogRoutes.route("/post/search", methods=['GET', 'POST'])
 def search():
     maintext = request.form.get("search")
     text = maintext
     if text is None or len(text) == 0:
         flash('Enter Search Text', category='error')
-        return redirect(url_for('blogRoutes.home'))
+        return redirect(url_for('blogRoutes.all_posts'))
     text = list(map(str.strip, text.strip().split()))
     sw = stopwords.words('english')
     text = [w for w in text if not w.lower() in sw]
