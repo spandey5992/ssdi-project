@@ -13,7 +13,7 @@ blogRoutes = Blueprint("blogRoutes", __name__)
 
 @blogRoutes.route("/profile")
 @login_required
-def home():
+def profile():
     top5posts = db.session.query(Post).filter(
         Post.userid == current_user.id).order_by(desc(Post.created_date)).limit(5).all()
     for row in top5posts:
@@ -47,7 +47,7 @@ def create_post():
         db.session.commit()
         flash('Post created!')
 
-        return redirect(url_for('blogRoutes.home'))
+        return redirect(url_for('blogRoutes.profile'))
 
     return render_template("createPost.html")
 
