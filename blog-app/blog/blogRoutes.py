@@ -189,3 +189,12 @@ def search():
         row.num_of_days = diff.days
 
     return render_template("allposts.html", posts=searched_post, page="Search Results for '"+maintext+"'")
+
+
+@blogRoutes.route("/about")
+def about():
+    return render_template("about.html")
+
+@blogRoutes.route("/contact")
+def contact():
+    return render_template("contact.html")
