@@ -17,7 +17,7 @@ def login():
             if check_password_hash(user.password, password):
                 flash("Logged in!", category='success')
                 login_user(user, remember=True)
-                return redirect(url_for('blogRoutes.home'))
+                return redirect(url_for('blogRoutes.profile'))
             else:
                 flash('Password incorrect.', category='error')
         else:
@@ -49,7 +49,7 @@ def sign_up():
             login_user(new_user_details, remember=True)
             flash('User created!')
             
-            return redirect(url_for('blogRoutes.home'))
+            return redirect(url_for('blogRoutes.profile'))
 
     return render_template("signup.html")
 
@@ -78,5 +78,5 @@ def edituser():
                                                         'password':generate_password_hash(password, method='sha256')})
         db.session.commit()
         flash('Details updated successfully', category='success')
-        return redirect(url_for('blogRoutes.home'))
+        return redirect(url_for('blogRoutes.profile'))
     return render_template("userEdit.html")
