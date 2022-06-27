@@ -88,7 +88,9 @@ def post(id):
     postid_count = list(tuple(zip(postid_count.keys(), postid_count.values())))
     postid_count.sort(key=lambda x: -x[1])
     postid_count = [x[0] for x in postid_count]
-    postid_count.remove(int(id))
+    print("----->",postid_count)
+    if int(id) in postid_count:
+        postid_count.remove(int(id))
     searched_post = db.session.query(Post).filter(
         Post.id.in_(postid_count)).limit(5).all()
 
